@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Cliente } from 'src/model/cliente';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-cliente-detalhes',
@@ -16,7 +17,9 @@ id : string;
 formGroup : FormGroup;
 cliente : Cliente = new Cliente();
 
-  constructor(private actRoute : ActivatedRoute,
+  constructor(
+    private router : Router,
+    private actRoute : ActivatedRoute,
   private formB : FormBuilder,
   private db : AngularFirestore,
   private toastCtrl : ToastController) { 
@@ -44,6 +47,12 @@ cliente : Cliente = new Cliente();
     }).catch(()=>{
       console.log('Erro ao Atualizar');
     })
+    }
+
+    excluir(){
+     this.db.collection('clientes').doc(this.cliente.id).delete().then(()=>{
+       this.router.navigate(['home']);
+     })
     }
 
     async presentToast() {
