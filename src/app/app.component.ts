@@ -25,6 +25,11 @@ export class AppComponent {
       title: 'Cadastro Cliente',
       url: '/cliente-cadastro',
       icon: 'persons'
+    },
+    {
+      title: 'Cliente Detalhe',
+      url: '/cliente-detalhe',
+      icon: 'person'
     }
   ];
 
